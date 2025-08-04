@@ -1264,14 +1264,11 @@ class _WebEngineWebAuth(QObject):
         self._on_ux_state_changed(request.state())
 
     def _on_ux_state_changed(self, state):
-        assert self._request is not None
-        log.webview.debug("Webauth UX state for "
-                          f"{self._request.relyingPartyId()}: {state}")
-
+        log.webview.debug(f"Webauth UX state: {state}")
         if state == QWebEngineWebAuthUxRequest.WebAuthUxState.CollectPin:
             self._ux_pin_request()
         elif state == QWebEngineWebAuthUxRequest.WebAuthUxState.FinishTokenCollection:
-            message.info("Please touch your device now.")
+            self._ux_finish_token_collection()
         elif state == QWebEngineWebAuthUxRequest.WebAuthUxState.SelectAccount:
             self._ux_account_selection()
         elif state == QWebEngineWebAuthUxRequest.WebAuthUxState.Completed:
@@ -1295,6 +1292,10 @@ class _WebEngineWebAuth(QObject):
             log.webview.debug("User verification aborted by user")
             self._request.cancel()
 
+    def _ux_finish_token_collection(self):
+        log.webview.debug("Finish Webauth token collection")
+        message.info("Please touch your device now.")
+
     def _ux_account_selection(self):
         assert self._request is not None
         log.webview.debug("Select Webauth account for "
@@ -1309,13 +1310,14 @@ class _WebEngineWebAuth(QObject):
             self._request.cancel()
 
     def _ux_request_completed(self):
+        log.webview.debug("Webauth request completed")
         message.info("User verification completed.")
         self._request = None
 
     def _ux_request_cancelled(self):
+        log.webview.debug("Webauth verification cancelled")
         message.info("User verification cancelled.")
         self._tab.abort_questions.emit()
-        self._request = None
 
     def _ux_request_failed(self):
         assert self._request is not None
