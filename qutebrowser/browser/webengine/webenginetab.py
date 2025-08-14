@@ -1265,7 +1265,7 @@ class _WebEngineWebAuth(QObject):
         self._on_ux_state_changed(request.state())
 
     def _on_ux_state_changed(
-        self, state: QWebEngineWebAuthUxRequest.WebAuthUxState
+        self, state: "QWebEngineWebAuthUxRequest.WebAuthUxState"
     ) -> None:
         log.webview.debug(f"Webauth UX state: {state}")
         if state == QWebEngineWebAuthUxRequest.WebAuthUxState.CollectPin:
@@ -1334,7 +1334,7 @@ class _WebEngineWebAuth(QObject):
         message.info(f"User verification failed: {reason_text}")
 
     def _get_failure_reason_text(
-        self, reason: QWebEngineWebAuthUxRequest.RequestFailureReason
+        self, reason: "QWebEngineWebAuthUxRequest.RequestFailureReason"
     ) -> str:
         texts = {
             QWebEngineWebAuthUxRequest.RequestFailureReason.Timeout:
