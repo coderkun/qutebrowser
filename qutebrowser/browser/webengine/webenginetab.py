@@ -1251,7 +1251,7 @@ class _WebEngineWebAuth(QObject):
 
     """Handling of Webauth signals."""
 
-    def __init__(self, tab: WebEngineTab, parent: Optional[QWidget] = None) -> None:
+    def __init__(self, tab: "WebEngineTab", parent: Optional[QWidget] = None) -> None:
         super().__init__(parent)
         self._tab = tab
         self._request: Optional[QWebEngineWebAuthUxRequest] = None
