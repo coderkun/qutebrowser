@@ -1338,7 +1338,7 @@ class _WebEngineWebAuth(QObject):
     ) -> str:
         texts = {
             QWebEngineWebAuthUxRequest.RequestFailureReason.Timeout:
-                "The request timeout out.",
+                "The request timed out.",
             QWebEngineWebAuthUxRequest.RequestFailureReason.KeyNotRegistered:
                 "The device is not registered.",
             QWebEngineWebAuthUxRequest.RequestFailureReason.KeyAlreadyRegistered:
@@ -1357,9 +1357,9 @@ class _WebEngineWebAuth(QObject):
             QWebEngineWebAuthUxRequest.RequestFailureReason.AuthenticatorMissingUserVerification:
                 "The device is missing user verification.",
             QWebEngineWebAuthUxRequest.RequestFailureReason.AuthenticatorMissingLargeBlob:
-                "The device s missing Large Blob support.",
-            QWebEngineWebAuthUxRequest.RequestFailureReason.NoCommonAlgorithms:
                 "The device is missing Large Blob support.",
+            QWebEngineWebAuthUxRequest.RequestFailureReason.NoCommonAlgorithms:
+                "No common algorithms",
             QWebEngineWebAuthUxRequest.RequestFailureReason.StorageFull:
                 "The storage on the device is full.",
             QWebEngineWebAuthUxRequest.RequestFailureReason.UserConsentDenied:
