@@ -1249,7 +1249,13 @@ class _WebEngineScripts(QObject):
 
 class _WebEngineWebAuth(QObject):
 
-    """Handling of Webauth signals."""
+    """Handling of Webauth events.
+
+    Signals:
+        request_cancelled: Emitted when a Webauth request was cancelled.
+    """
+
+    request_cancelled = pyqtSignal()
 
     def __init__(self, tab: "WebEngineTab", parent: Optional[QWidget] = None) -> None:
         super().__init__(parent)
@@ -1320,7 +1326,7 @@ class _WebEngineWebAuth(QObject):
     def _ux_request_cancelled(self) -> None:
         log.webview.debug("Webauth verification cancelled")
         message.info("User verification cancelled.")
-        self._tab.abort_questions.emit()
+        self.request_cancelled.emit()
 
     def _ux_request_failed(self) -> None:
         assert self._request is not None
@@ -1377,7 +1383,7 @@ class _WebEngineWebAuth(QObject):
             title=f"User Verification for {url}",
             text="Please enter the PIN for your device:",
             mode=usertypes.PromptMode.pwd,
-            abort_on=[self._tab.abort_questions])
+            abort_on=[self._tab.abort_questions, self.request_cancelled])
 
     def _select_account(self, url: str, usernames: list[str]) -> Any:
         """Ask a prompt for a webauth account selection."""
@@ -1388,7 +1394,7 @@ class _WebEngineWebAuth(QObject):
         return message.ask(
             title=f"Account Selection for {url}", text=text,
             choices=usernames, mode=usertypes.PromptMode.select,
-            abort_on=[self._tab.abort_questions])
+            abort_on=[self._tab.abort_questions, self.request_cancelled])
 
 
 class WebEngineTabPrivate(browsertab.AbstractTabPrivate):
