@@ -1350,8 +1350,8 @@ class _WebEngineWebAuth(QObject):
             QWebEngineWebAuthUxRequest.RequestFailureReason.KeyAlreadyRegistered:
                 "You already registered this device.",
             QWebEngineWebAuthUxRequest.RequestFailureReason.SoftPinBlock:
-                "The device is locked because the wrong PIN was entered too "
-                "many times.",
+                "The device is soft-locked because the wrong PIN was entered "
+                "too many times.",
             QWebEngineWebAuthUxRequest.RequestFailureReason.HardPinBlock:
                 "The device is hard-locked because the wrong PIN was entered "
                 "too many times.",
