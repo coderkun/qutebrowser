@@ -670,7 +670,7 @@ class WebEngineVersions:
         utils.VersionNumber(6, 11, 2): (_BASES[140], '151.0.7922.71'),  # 2026-07-28
 
         ## Starting with Qt 6.12 Beta 4, QtWebEngine is versioned independently from Qt
-        utils.VersionNumber(6, 140): (_BASES[140], '151.0.7922.173'),  # 2026-08-19
+        utils.VersionNumber(6, 140): (_BASES[140], '151.0.7922.71'),  # 2026-07-28
     }
 
     def __post_init__(self) -> None:
