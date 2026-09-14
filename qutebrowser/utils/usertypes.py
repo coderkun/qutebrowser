@@ -403,7 +403,7 @@ class Question(QObject):
         self.text: str | None = None
         self.url: str | None = None
         self.option: bool | None = None
-        self.choices: Optional[list[str]] | None = None
+        self.choices: list[str] | None = None
         self.answer: str | bool | None = None
         self.is_aborted = False
         self.interrupted = False
