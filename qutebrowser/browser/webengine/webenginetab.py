@@ -1261,10 +1261,10 @@ class _WebEngineWebAuth(QObject):
 
     request_cancelled = pyqtSignal()
 
-    def __init__(self, tab: "WebEngineTab", parent: Optional[QWidget] = None) -> None:
+    def __init__(self, tab: "WebEngineTab", parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self._tab = tab
-        self._request: Optional[QWebEngineWebAuthUxRequest] = None
+        self._request: QWebEngineWebAuthUxRequest | None = None
 
     def on_ux_requested(self, request: QWebEngineWebAuthUxRequest) -> None:
         """Handle a Webauth UX request."""
